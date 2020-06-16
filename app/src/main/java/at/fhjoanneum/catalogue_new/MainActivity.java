@@ -10,18 +10,23 @@ import android.widget.ImageView;
 
 import com.google.android.material.bottomappbar.BottomAppBar;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import at.fhjoanneum.catalogue_new.https.HttpsGetImageTask;
+import at.fhjoanneum.catalogue_new.https.HttpsGetJsonTask;
 
 public class MainActivity extends AppCompatActivity {
 
     private BottomAppBar bottomAppBar;
     private ImageView mainImageView;
-    private String api_url = "https://cdn2.thecatapi.com/v1/images/search";
+    private String api_url = "https://api.thecatapi.com/v1/images/search";
     private String breed_filter = "";
     private List<String> breeds = new ArrayList<>();
     private Map<String,String> breedMap = new HashMap();
@@ -39,8 +44,8 @@ public class MainActivity extends AppCompatActivity {
         testList();
         testMap();
 
-        setMainImage("https://cdn2.thecatapi.com/images/au1.jpg");
-        //setMainImage(api_url);
+        //setMainImage("https://cdn2.thecatapi.com/images/au1.jpg");
+        newRandomImg(api_url);
     }
 
 
@@ -75,6 +80,23 @@ public class MainActivity extends AppCompatActivity {
         HttpsGetImageTask it = new HttpsGetImageTask(this.mainImageView);
         it.execute(newImageUrl);
 
+    }
+
+
+    public void newRandomImg(String newImageUrl){
+        HttpsGetJsonTask gj = new HttpsGetJsonTask(this);
+        gj.execute(newImageUrl);
+    }
+
+    public void parseImgJson(JSONArray jsonArray){
+        String url = "";
+        try {
+            JSONObject jo = jsonArray.getJSONObject(0);
+            url = jo.getString("url");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        setMainImage(url);
     }
 
     public void testMap(){

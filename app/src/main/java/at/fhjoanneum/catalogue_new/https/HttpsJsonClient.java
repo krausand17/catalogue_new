@@ -1,5 +1,7 @@
 package at.fhjoanneum.catalogue_new.https;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import java.io.BufferedReader;
@@ -47,6 +49,7 @@ public class HttpsJsonClient {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        Log.i("andi","JsonArray client: \n"+result.toString());
         return result;
     }
 }
