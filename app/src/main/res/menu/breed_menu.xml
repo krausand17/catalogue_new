@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Random"
+        android:id="@+id/breed_random"/>
+    <item android:title="test"/>
+</menu>
