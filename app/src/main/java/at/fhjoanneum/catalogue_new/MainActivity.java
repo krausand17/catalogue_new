@@ -6,9 +6,12 @@ import androidx.appcompat.widget.AppCompatImageView;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.google.android.material.bottomappbar.BottomAppBar;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,6 +43,14 @@ public class MainActivity extends AppCompatActivity {
 
         bottomAppBar = findViewById(R.id.bottomBar);
         setSupportActionBar(bottomAppBar);
+
+        final FloatingActionButton actionButton = findViewById(R.id.actionButton);
+        actionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                newRandomImg(api_url);
+            }
+        });
 
         testList();
         testMap();
