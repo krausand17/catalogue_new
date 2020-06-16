@@ -34,12 +34,16 @@ public class HttpsGetJsonTask extends AsyncTask<String, Void, JSONArray> {
                 e.printStackTrace();
             }
             Log.i("andi","JsonArray task: \n"+jsonArray.toString());
+            Log.i("andi","JsonArray length: "+jsonArray.length());
             return jsonArray;
     }
 
     @Override
     protected void onPostExecute(JSONArray jsonArray) {
         super.onPostExecute(jsonArray);
-        ma.parseImgJson(jsonArray);
+        if (jsonArray.length()>1)
+            ma.parseBreedJson(jsonArray);
+        else
+            ma.parseImgJson(jsonArray);
     }
 }
